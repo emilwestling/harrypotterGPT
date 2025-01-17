@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>harrypotterGPT</title>
+    <style>
+      body {
+        background-color: #201d1d;
+        color: #ffffff;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
+          Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+        line-height: 1.7;
+        padding: 40px;
+        font-size: 18px;
+      }
+      header {
+        background-color: #201d1d;
+        padding: 10px 20px;
+        text-align: center;
+      }
+      header h1 {
+        margin: 0;
+      }
+      nav {
+        margin: 20px;
+        text-align: center;
+      }
+      nav a {
+        color: #aa7777;
+        text-decoration: none;
+        margin: 0 15px;
+        font-weight: bold;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .section {
+        margin-bottom: 40px;
+      }
+      .section h2 {
+        border-bottom: 2px solid #aa7777;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+      }
+
+      .link {
+        color: #64b5f6;
+      }
+      .visualization img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 10px auto;
+      }
+      footer {
+        background-color: #1e1e1e;
+        padding: 10px 20px;
+        text-align: center;
+        color: #e0e0e0;
+      }
+
+      .menu-bar {
+        background-color: #201d1d; /* Dark background for the menu */
+        padding: 10px 0;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+      }
+      .menu-bar a {
+        color: #ffffff; /* White text for menu items */
+        text-decoration: none;
+        padding: 10px 20px;
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Menu Bar -->
+    <div class="menu-bar">
+      <a href="https://www.emilwestling.com/index.html">About Me</a>
+      <a href="https://www.emilwestling.com/portfolio.html">Portfolio</a>
+      <a href="https://www.emilwestling.com/resume.pdf" target="_blank"
+        >Resume</a
+      >
+    </div>
+    <header>
+      <h1>harrypotterGPT</h1>
+    </header>
+    <nav>
+      <a href="#overview">Overview</a>
+      <a href="#github">GitHub</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="container">
+      <section id="overview" class="section">
+        <h2>Overview</h2>
+        <p>
+          Welcome to harrypotterGPT! This projects implements a mini GPT model
+          that can write infinite Harry Potter. It's a project focused on
+          natural language processing and generative AI. The models are trained
+          on a coherent dataset containing all the Harry Potter books. This
+          allows the model to output more Harry Potter inspired text. Although
+          most language models are implemented as autoregressive models on the
+          word, or subwords, level, I decided to implement this on a character
+          based level for the sake of simplicity. Thus, the models generates one
+          character at a time in an autoregressive fashion.
+        </p>
+        <p>
+          As a baseline model, I implemented the simplest of language models,
+          the Bigram model. It makes predictions by only looking at the most
+          recent character. It is extremely bad at generating sensible text
+          since it has no knowledge of the characters beyond the preceeding
+          letter. The output of the Bigram model is below:
+        </p>
+
+        <div
+          style="
+            height: 100px;
+            width: 800px;
+            border: 1px solid #ccc;
+            padding: 5px;
+            border-radius: 8px;
+            font: 16px/26px Georgia, Garamond, Serif;
+            overflow: auto;
+          "
+        >
+          Foasthaprse tize herst el O u fZEie hy: Hak, CORineg aggell thrr
+          Masearor charnge? Tyoucre thy, chouspo in mppry way avend oubur'er
+          sickes bokecard dhiceny He tw el fe oupise he, lbustselownthous; I m w
+          T: The at; I m hofaruk mondrn itheland's oe, oghithet f,
+          badogienthofBRI'sey &CleDWeer'dsureisold array n ICoyockind m murs, in
+          mamybalorenyongmyooe, d Vofetthindy st Hefqu brveseay alsteanerm to,
+          oupomp rede d pre h, gavitYOfrrerean apsts lathind my d erouerse
+          IOLUED d ngKE hicerire. II IS: I
+        </div>
+        <p>
+          As the main model, I implemented a decoder transformer model based on
+          the famous research paper
+          <a class="link" href="https://arxiv.org/abs/1706.03762"
+            >"Attention is All You Need"</a
+          >
+          from 2017. The model has the same architecture as the decoder block
+          presented in the paper. The model has just over 10.7M parameters and
+          is trained on roughly 6 million tokens. For comparison, GPT-3 has 175
+          billion parameters and was trained on 300 billion tokens. By simply
+          looking at the output below, it might seem reasonable. However, when
+          you start reading it you'll see that it doesn't make much sense. I
+          believe this is a consequence of the simplicity of the model and the
+          scarce dataset. I would be able to train a more complex network if I
+          had more computing power.
+        </p>
+        <div
+          style="
+            height: 200px;
+            width: 800px;
+            border: 1px solid #ccc;
+            padding: 5px;
+            border-radius: 8px;
+            font: 16px/26px Georgia, Garamond, Serif;
+            overflow: auto;
+          "
+        >
+          among Ron even Galleons robes out standing emblisty fire called Potter
+          !Harry remoted .Screamed Our naver beard !Between people and Hermione
+          could all providing and tried to deal Umbridges right imaginant but
+          the greenhouses breeze rush in the foreign in the mater the useful
+          creeats perched baths of dangerous common room on the fork his eyes
+          drovely he flated them a little dull for his own forehead box .Im
+          sorry said Harry bravely .She thats just weach dear .She must enter
+          exclasm lessons freement or libyrange need to Scabbers now by our
+          common room that is ?By the Dark Urders bodyched who hadnt continued
+          into accomprehenese her barely sure just because she approached the
+          windows creaking her waistBlack disrovements when we gown and triveled
+          for two butliling evening except and twenty fortural weekendures
+          woldaO .All between .To the open .Remember .come here no not said
+          Sirius .He had hootherly had stopped across the Bludger had been to
+          give this Order Harry said deeply and door open bag a desk .You havent
+          speak Harrys might mont Munduffgus goal .Theres just least their faul
+          we else show Petunia cross and as there said Harry .She stands still
+          shaking all over Ron and Hermione s hand perched Black servant of
+          satisomacks to face curious if Harry too test you said Ginny angrier
+          at Harry .Harry asked .Willing you when he read me Hermione looked as
+          though I locke unfortunately of all the empty latter I am .Right said
+          Dumbledore after an houseelf rather have somilated you fan you forgot
+          two .He gave sit full of banks and you can understand enough yourself
+          at it was Neville .See very harderouses much likea Bill and Galleons
+          big times to kill for this elf hes rup through both him and whispered
+          those movement one as the spell mets off to my very worst fun what
+          sounded inventing we 1 have been Probably Plank so good for you left
+          ?An then Protected seaming spectioner of Dumbledore was never both
+          since of ten .Fround George cant get Goyle .And youre a genialo as of
+          the Ministry people of Dobby family hiding go .Potter sir dont worry
+          !Harry screamed the werewolfs promphle?Viikdouble Dumbledore once
+          Professor Sprout said Look anxiously .Harry repeated .Their brooms
+          Harry felt that foot but always the arcivals at the staff for Harry
+          food the laugh .Were not coming wizard just put looking at Hagrids
+          bone with laughing wood like !And only Mr Weasley when persuaded her
+          clear ways too person careless lay flowled forward .And the first
+          doors had flown three huge with when roasts followens were closed
+          closed into bowel none of them carried from the ground seated sperring
+          .Harry come into Slughorns hoom afternoon yet says said Hermione
+          powerful above Malfoy shostly .Harry has planned to hear a great
+          student at a lesson at valenting Rons blood looked up theyd must well
+          attempt to tell them he had been an uggested in Malfoy had getten
+          concerned himself .You wish it .Malfoy snoog a quarter and I know
+          Lupin picked out a little danger from cardled up for the moment he
+          took there but when he would be becareful if hed known he had used the
+          prophecy and he slung down open his mind .The Witchs alleyhaired
+          labeled .Yeah blue or he was merely lifted from ninece he was rae .Of
+          this owl must .he had steal sunk and avotestrolled the gentulies was
+          stand out the bell of the door .Harry thought What made it up the
+          little champion down all the most names of the whispers from their
+          hand a chuckle and his bounches cackled face and Dumbledore tor where
+          their screemed a potion carriages were birtting .Other words .that was
+          so very good idea how much up the leaks interest but it was locked in
+          his head the scream unlikely other man warmuged the females who turned
+          poularter make which one tiny giant figure .Thousan he was not
+          expecting a Grimmaul something boy after that noticing with
+          Brykhardfamily and Ginny went up awake .As price as you are ustend to
+          me Professor McGonagall go too .Professories protecting ?I doubt a
+          door than Aragonsleys either theyve said .An inditional the Grimmauld
+          Place they were building out of the portrait of business tea all Bills
+          and wimmes he had fallen fainted silenting .It was an inch time alarm
+          .It was still more a keep ‘He glanced from his very fruer than We can
+          use just show that Harry Potter unusually sensationally on hiss .Ted
+          gin nearer interest Apparate with Professor Umbridge ?Harry asked
+          broadly and your frames .Its not very small iste during magny .Harry
+          could think that morning was than they were having and having slipped
+          black greaned into the rohes windows .Sanne !hickled Harry .Now Im
+          sure .a I think that swork him .Why will Mr Olliver sproute I hiding
+          you think wed better be near said Ginny thoroshing pinks not .He was
+          making thinking of greenhouse and vanished by the time there were
+          looking of blaze and shuff once a rin arm and blew heard it say
+          demertors innocent thirteen than the one hand he gave a smile .Sirius
+          said as muttering breakfast as Riddle and Ron bitter friendyly .Yeah
+          yehll be aile said Hagrid half made himssed it us a cat bat her pup
+          .Harry let out a quintment and Moody said Tonks shaking handkerch
+          there .Theyre night theyll not get linger to do with their hours song
+          eeth out of the green light ayoulelged but someowake did need to take
+          them .Harry had restered that to the feast after him not said Luping
+          showering sturface Ron .You knew anyone it was reading to hatrasp that
+          that said almost full airply to Harry a meeting in the champion with
+          them .Ebbited !said Hermione slowly .WHarry called a parchment into
+          the highpitched pairs leaving giant wing steal very more keen on
+          merrily becoming fast .For something Imppeter Curse insplictement
+          batlacks an head Ravenclaw threw his hown dark pain Harry was soler
+          .Harry knew whater the dementors he was covered out the school by
+          three hundred this time took a dark frozen on the fountain .Hullo with
+          one shallowed from him up the steps Harry could not toll him .Harry
+          saw that Fange had gotnicked he run down on the floor between the dent
+          ferm the staff are twenty feet his brain were a hystle featherous
+          belone Voldemort .He did not want to look at the wizard before said
+          Missa !Hogwarts and the sectarious .But theres looking !Harry
+          transportials faces now let out Ron at the shorarian and gaveling
+          himselves cat dry lemon emboring .Charms open Harrys clipboards like
+          Lets Argus Dungs last Friday Took of serveng sweat sticking on his
+          knife and for Harrry spun for the right wall .Maybe for stream for you
+          this black effore .His an angry conversation evening wizard bit than
+          his taes and hears that turned suspiciously over magic however when
+          everyone while there !May Doges a sight nose in the deal to stay up
+          here !Harry could think down that still silk and Crabbe and Goyle
+          around them to well back and sleepily bewilder than it happened .Mr
+          Weasley by Mr Weasley at the Durmstrang Cornelie and Snape fell
+          slightly over her he straightened to the castle giving the bless
+          without practiven and seemed to make Harry feel at fear Harry couldnt
+          hell of movement and once at all .One wizards first please in our
+          Death Eater whose nonstructed perfect but And unwikstan particularly
+          followed Dumbledores snock that they were hoaded or examinin
+          Dumbledores kept so low sharps with tables forming very time .The
+          Dreath Educted .He however began he attempted to motion anybody net at
+          them but Harry and Ron opened the steps windows to check when the
+          Honeys light had gone ‘He tries he finished as promission to find the
+          secret hund him in the heavily of crease his voice fere giving it they
+          instructed how could Sirius said this cannon .At once the first time
+          to admance Park and threw him !said Mrs Weasley madly .I dont mink me
+          Id find that !said Harry looking around Floud .Hissing face ?he said
+          lunch .She took a door from metalking in the direction of what lit was
+          growing of silent pear victor .12 really be in there Gryffeor will
+          find out said Harry a lookout first clenches that had it happened .A
+          golden fireliesnt like she stamped up a wideaged tight that which
+          could not be in date that might have been worried by at some feet
+          .Good the load is carrying this gold place .He does hour .Neither be
+          and new kind of his fatture into people ?Being his proof toment .We
+          might have got researched her .Sirius said Dumbledore looking other
+          .Ill be hopeful have a changed dragon of free .Wed what we know
+          Professor Dumbledore littered trembling Im heard any practical
+          teachers tonight this ?Riddle made the jet of the fact that he could
+          no dear not to know whether that he was still disturbed But Scrimgeour
+          willn not to distract him .Protective that custartains have been
+          suddenly impised the dementors with his warm .Harry did not
+          approaching of the dementors and dare you like to put go in any chance
+          are gaiting startledoned pointing of Lavender Delacour .7 I with Ron
+          forced them once Harry !he craned to the noise the right .Gige Must go
+          to it said Harry and smalling to Hedwigs making noise a something
+          thing Gryffindor spreaded him every finished and Dumbledore too
+          Dumbledores office spast from whom happening to Harry who could take
+          clump off .Yeah did .Sirius treasured Harry and Redita oncertovity as
+          though I have given in Both for the time Id better groan .What it
+          worth team though he spots of telling them .He was useful to discuss
+          you to get rid of my hostbuilt that he did so you have used to be
+          Perhaps when that matters seemed to be deeply .Invisibility where the
+          truth that was around Like Fellure .At this at the strain Harry
+          .Hermione got up felt over the house individently he had never been
+          making it back and always was happened levely over her and her senset
+          .Reseived in stee vir in a prophecy !he shouted across the currently
+          .Injusticed her osquinet in caught .Er at the Gryffindor bottle was
+          trolles on the sacketblank !Where ?she said smiling .She made the girl
+          pale .Someones have got away him about the vaste ?Harry greated tanger
+          .Im taking Imporwarte .If Professor Draco did are my not actiding
+          .Come on
+        </div>
+      </section>
+      <section id="github" class="section">
+        <h2>GitHub</h2>
+        <p>
+          The full code is available on my
+          <a
+            class="link"
+            href="https://github.com/emilwestling/harrypotterGPT"
+            target="_blank"
+            >GitHub repository</a
+          >.
+        </p>
+      </section>
+      <section id="contact" class="section">
+        <h2>Contact</h2>
+        <p>
+          For more information or inquiries about this project, please contact
+          me at:
+          <br />
+          <a class="link" href="mailto:westling01@gmail.com"
+            >westling01@gmail.com</a
+          >
+        </p>
+      </section>
+    </div>
+    <footer>
+      <p>&copy; 2025 Emil Westling. All rights reserved.</p>
+    </footer>
+  </body>
+</html>
